@@ -1,0 +1,7 @@
+{
+  "name": "WasteNot Kitchen",
+  "description": "Smart food inventory tracker that generates AI-powered meal plans to minimize food waste.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
