@@ -79,21 +79,21 @@ export const InventoryForm: React.FC<InventoryFormProps> = ({ onAdd }) => {
       
       {/* Manual Entry Form */}
       <form onSubmit={handleSubmit}>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-          <div className="lg:col-span-2">
-            <label className="block text-xs font-medium text-slate-500 mb-1">Item Name</label>
+        <div className="space-y-4">
+          <div>
+            <label className="block text-xs font-medium text-slate-500 mb-1.5">Item Name</label>
             <input
               type="text"
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="e.g., Bananas"
-              className="w-full rounded-lg border-slate-200 focus:border-emerald-500 focus:ring focus:ring-emerald-200 focus:ring-opacity-50 transition-all px-3 py-2 border text-sm"
+              className="w-full rounded-lg border-slate-200 focus:border-emerald-500 focus:ring focus:ring-emerald-200 focus:ring-opacity-50 transition-all px-3 py-2.5 border text-sm"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-slate-500 mb-1">Quantity</label>
+            <label className="block text-xs font-medium text-slate-500 mb-1.5">Quantity</label>
             <div className="flex">
               <input
                 type="number"
@@ -102,12 +102,12 @@ export const InventoryForm: React.FC<InventoryFormProps> = ({ onAdd }) => {
                 value={quantity}
                 onChange={(e) => setQuantity(e.target.value)}
                 placeholder="0"
-                className="w-2/3 rounded-l-lg border-slate-200 focus:border-emerald-500 focus:ring focus:ring-emerald-200 focus:ring-opacity-50 px-3 py-2 border text-sm"
+                className="flex-1 rounded-l-lg border-slate-200 focus:border-emerald-500 focus:ring focus:ring-emerald-200 focus:ring-opacity-50 px-3 py-2.5 border text-sm"
               />
               <select
                 value={unit}
                 onChange={(e) => setUnit(e.target.value)}
-                className="w-1/3 rounded-r-lg border-l-0 border-slate-200 bg-slate-50 focus:border-emerald-500 focus:ring focus:ring-emerald-200 px-2 py-2 border text-sm"
+                className="rounded-r-lg border-l-0 border-slate-200 bg-slate-50 focus:border-emerald-500 focus:ring focus:ring-emerald-200 px-2 py-2.5 border text-sm min-w-[90px]"
               >
                 {UNITS.map(u => <option key={u} value={u}>{u}</option>)}
               </select>
@@ -115,24 +115,24 @@ export const InventoryForm: React.FC<InventoryFormProps> = ({ onAdd }) => {
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-slate-500 mb-1">Category</label>
+            <label className="block text-xs font-medium text-slate-500 mb-1.5">Category</label>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="w-full rounded-lg border-slate-200 focus:border-emerald-500 focus:ring focus:ring-emerald-200 px-3 py-2 border text-sm"
+              className="w-full rounded-lg border-slate-200 focus:border-emerald-500 focus:ring focus:ring-emerald-200 px-3 py-2.5 border text-sm"
             >
               {FOOD_CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-slate-500 mb-1">Expiry Date</label>
+            <label className="block text-xs font-medium text-slate-500 mb-1.5">Expiry Date</label>
             <input
               type="date"
               required
               value={expiryDate}
               onChange={(e) => setExpiryDate(e.target.value)}
-              className="w-full rounded-lg border-slate-200 focus:border-emerald-500 focus:ring focus:ring-emerald-200 px-3 py-2 border text-sm text-slate-600"
+              className="w-full rounded-lg border-slate-200 focus:border-emerald-500 focus:ring focus:ring-emerald-200 px-3 py-2.5 border text-sm text-slate-600"
             />
           </div>
         </div>
