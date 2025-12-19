@@ -254,22 +254,22 @@ const App: React.FC = () => {
 
              {/* Main Content Area */}
              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-               {/* Left: List */}
+               {/* Left: Grid */}
                <div className="lg:col-span-2 space-y-6">
                  <div className="flex justify-between items-center">
                    <h2 className="text-xl font-bold text-slate-800">Your Inventory</h2>
                    <span className="text-sm text-slate-500">Sorted by Expiry</span>
                  </div>
 
-                 <div className="space-y-3">
-                   {inventory.length === 0 ? (
-                     <div className="text-center py-12 bg-white rounded-xl border border-dashed border-slate-300">
-                       <Refrigerator className="mx-auto text-slate-300 mb-3" size={48} />
-                       <p className="text-slate-500 font-medium">Your pantry is empty</p>
-                       <p className="text-slate-400 text-sm">Add items to generate a meal plan</p>
-                     </div>
-                   ) : (
-                     [...inventory]
+                 {inventory.length === 0 ? (
+                   <div className="text-center py-12 bg-white rounded-xl border border-dashed border-slate-300">
+                     <Refrigerator className="mx-auto text-slate-300 mb-3" size={48} />
+                     <p className="text-slate-500 font-medium">Your pantry is empty</p>
+                     <p className="text-slate-400 text-sm">Add items to generate a meal plan</p>
+                   </div>
+                 ) : (
+                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                     {[...inventory]
                       .sort((a, b) => new Date(a.expiryDate).getTime() - new Date(b.expiryDate).getTime())
                       .map(item => (
                         <InventoryItem 
@@ -277,9 +277,9 @@ const App: React.FC = () => {
                           item={item} 
                           onDelete={handleDeleteItem} 
                         />
-                      ))
-                   )}
-                 </div>
+                      ))}
+                   </div>
+                 )}
                </div>
 
                {/* Right: Actions & Form */}
