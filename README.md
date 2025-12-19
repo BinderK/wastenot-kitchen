@@ -1,6 +1,10 @@
 # WasteNot Kitchen
 
 A smart meal planning application that helps you reduce food waste by generating personalized meal plans based on your current inventory and expiry dates.
+<img width="1722" height="933" alt="image" src="https://github.com/user-attachments/assets/687579d1-a093-447c-bfcc-cbc2bdd7a277" /><br />
+<img width="1722" height="933" alt="image" src="https://github.com/user-attachments/assets/3616b372-a9be-448a-927a-e5d1887b18b2" />
+
+
 
 ## Features
 
