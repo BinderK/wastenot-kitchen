@@ -389,7 +389,14 @@ def health_check():
     return jsonify({"status": "ok", "message": "Solver server is running"})
 
 if __name__ == '__main__':
-    print("Starting WasteNot Kitchen Solver Server on http://localhost:5000")
-    print("Health check: http://localhost:5000/health")
-    app.run(host='0.0.0.0', port=5111, debug=True)
+    import os
+    # Security: Only enable debug mode in development
+    # Set FLASK_ENV=development to enable debug mode, or FLASK_ENV=production to disable
+    debug_mode = os.getenv('FLASK_ENV', 'development') == 'development'
+    port = int(os.getenv('PORT', 5111))
+    
+    print("Starting WasteNot Kitchen Solver Server on http://localhost:{}".format(port))
+    print("Health check: http://localhost:{}/health".format(port))
+    print("Debug mode: {}".format("ON" if debug_mode else "OFF"))
+    app.run(host='0.0.0.0', port=port, debug=debug_mode)
 

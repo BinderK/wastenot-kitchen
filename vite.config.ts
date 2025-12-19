@@ -11,6 +11,9 @@ export default defineConfig(({ mode }) => {
       },
       plugins: [react()],
       define: {
+        // SECURITY NOTE: These environment variables are inlined at build time.
+        // For production, ensure GEMINI_API_KEY is only set during build if you want it in the bundle.
+        // Consider using a backend proxy for API calls in production to keep keys server-side.
         'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
         'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
       },
