@@ -9,6 +9,8 @@ import { configurePassport } from './config/passport.js';
 import authRoutes from './routes/auth.js';
 import inventoryRouter from './routes/inventory.js';
 import recipesRouter from './routes/recipes.js';
+import mealPlansRouter from './routes/mealPlans.js';
+import geminiRouter from './routes/gemini.js';
 
 dotenv.config();
 
@@ -24,8 +26,8 @@ app.use(cors({
   credentials: true,
 }));
 
-// Body parser
-app.use(express.json());
+// Body parser (increased limit for base64 images from Gemini)
+app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
 // Initialize Passport
@@ -41,17 +43,17 @@ app.use(passport.initialize());
 // app.use('/api/auth/login', authLimiter);
 // app.use('/api/auth/register', authLimiter);
 
-// Routes
-app.use('/api/auth', authRoutes);
-
 // Health check
 app.get('/', (req: Request, res: Response) => {
   res.json({ message: 'Hello from WasteNot Kitchen API!' });
 });
 
-// API Routes
+// Routes
+app.use('/api/auth', authRoutes);
 app.use('/api/inventory', inventoryRouter);
 app.use('/api/recipes', recipesRouter);
+app.use('/api/meal-plans', mealPlansRouter);
+app.use('/api/gemini', geminiRouter);
 
 // Error handling middleware
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
