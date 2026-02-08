@@ -2,16 +2,23 @@
   "compilerOptions": {
     "target": "ES2022",
     "module": "ESNext",
-    "moduleResolution": "bundler",
     "lib": ["ES2022"],
+    "moduleResolution": "bundler",
+    "rootDir": ".",
+    "outDir": "./dist",
+    "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "strict": true,
+    "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "outDir": "./dist",
-    "rootDir": ".",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "paths": {
+      "@shared/*": ["../shared/*"]
+    },
     "types": ["node"]
   },
-  "include": ["prisma/**/*", "src/**/*"],
+  "include": ["src/**/*", "prisma/**/*"],
   "exclude": ["node_modules", "dist"]
 }

@@ -4,13 +4,13 @@ import { InventoryForm } from './components/InventoryForm';
 import { MealPlanView } from './components/MealPlanView';
 import { PlanSelectionView } from './components/PlanSelectionView';
 import { RecipeBookView } from './components/RecipeBookView';
-import { INITIAL_INVENTORY, LOCAL_RECIPES } from './constants';
-import { FoodItem, MealPlanResponse, ViewState, Recipe, MealType, InventoryUsage, MealPlanSet } from './types';
+import { INITIAL_INVENTORY, LOCAL_RECIPES } from '@shared/constants';
+import { FoodItem, MealPlanResponse, ViewState, Recipe, MealType, InventoryUsage, MealPlanSet } from '@shared/types';
 import { generateMealPlans } from './services/geminiService';
 import { generateLocalMealPlans } from './services/localPlanService';
 import { generateOptimalMealPlan } from './services/solverService';
 import { Refrigerator, Sparkles, AlertTriangle, Info, Calendar, CheckSquare, Square, BookOpen, Bot, Book, Clock, SlidersHorizontal, Server } from 'lucide-react';
-import { convertAmount } from './utils';
+import { convertAmount } from '@shared/utils';
 
 type GenMode = 'AI' | 'LOCAL' | 'SOLVER';
 

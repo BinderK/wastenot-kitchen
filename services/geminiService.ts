@@ -1,5 +1,5 @@
 import { GoogleGenAI, Type } from "@google/genai";
-import { FoodItem, MealPlanSet, MealType } from "../types";
+import { FoodItem, MealPlanSet, MealType } from "@shared/types";
 
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 

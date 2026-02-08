@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
-import { Recipe, FoodItem } from '../types';
-import { getRecipeMatchStatus, RecipeMatchStatus } from '../utils';
+import { Recipe, FoodItem } from '@shared/types';
+import { getRecipeMatchStatus, RecipeMatchStatus } from '@shared/utils';
 import { BookOpen, Clock, CheckCircle, XCircle, Filter, ChefHat, ArrowLeft, AlertCircle } from 'lucide-react';
 
 interface RecipeBookViewProps {
