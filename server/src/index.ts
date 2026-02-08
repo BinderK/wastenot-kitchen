@@ -7,6 +7,8 @@ import passport from 'passport';
 // import rateLimit from 'express-rate-limit';
 import { configurePassport } from './config/passport.js';
 import authRoutes from './routes/auth.js';
+import inventoryRouter from './routes/inventory.js';
+import recipesRouter from './routes/recipes.js';
 
 dotenv.config();
 
@@ -42,8 +44,19 @@ app.use(passport.initialize());
 // Routes
 app.use('/api/auth', authRoutes);
 
+// Health check
 app.get('/', (req: Request, res: Response) => {
   res.json({ message: 'Hello from WasteNot Kitchen API!' });
+});
+
+// API Routes
+app.use('/api/inventory', inventoryRouter);
+app.use('/api/recipes', recipesRouter);
+
+// Error handling middleware
+app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  console.error('Unhandled error:', err);
+  res.status(500).json({ error: 'Internal server error' });
 });
 
 app.listen(PORT, () => {
