@@ -1,6 +1,6 @@
-import { FoodItem, MealPlanSet, MealType, MealPlanResponse, MealPlanMeal, Recipe, InventoryUsage } from "../types";
-import { LOCAL_RECIPES } from "../constants";
-import { convertAmount, normalizeUnit } from "../utils";
+import { FoodItem, MealPlanSet, MealType, MealPlanResponse, MealPlanMeal, Recipe, InventoryUsage } from "@shared/types";
+import { LOCAL_RECIPES } from "@shared/constants";
+import { convertAmount, normalizeUnit } from "@shared/utils";
 
 // Helper to track running inventory state
 interface InventoryState {

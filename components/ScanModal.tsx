@@ -1,9 +1,9 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { FoodItem } from '../types';
+import { FoodItem } from '@shared/types';
 import { identifyInventoryFromImage } from '../services/geminiService';
 import { X, Camera, Upload, Trash2, Check, Loader2, AlertCircle, Plus } from 'lucide-react';
-import { UNITS, FOOD_CATEGORIES } from '../constants';
+import { UNITS, FOOD_CATEGORIES } from '@shared/constants';
 
 interface ScanModalProps {
   isOpen: boolean;

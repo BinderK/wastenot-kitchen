@@ -1,5 +1,5 @@
 import React from 'react';
-import { FoodItem } from '../types';
+import { FoodItem } from '@shared/types';
 import { Trash2, AlertCircle, CheckCircle, Clock } from 'lucide-react';
 
 interface InventoryItemProps {
