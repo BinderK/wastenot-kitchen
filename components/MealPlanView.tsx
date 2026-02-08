@@ -1,5 +1,5 @@
 import React from 'react';
-import { MealPlanResponse, Recipe, MealPlanMeal } from '../types';
+import { MealPlanResponse, Recipe, MealPlanMeal } from '@shared/types';
 import { ChefHat, Clock, ArrowRight, Leaf, ArrowLeft, Check, Utensils, Play } from 'lucide-react';
 
 interface MealPlanViewProps {

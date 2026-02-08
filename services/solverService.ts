@@ -1,6 +1,6 @@
-import { FoodItem, Recipe, MealPlanSet, MealType, MealPlanResponse, InventoryUsage } from "../types";
-import { LOCAL_RECIPES } from "../constants";
-import { convertAmount, normalizeUnit } from "../utils";
+import { FoodItem, Recipe, MealPlanSet, MealType, MealPlanResponse, InventoryUsage } from "@shared/types";
+import { LOCAL_RECIPES } from "@shared/constants";
+import { convertAmount, normalizeUnit } from "@shared/utils";
 
 const API_URL = "http://localhost:5111/solve";
 

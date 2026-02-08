@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
-import { FoodItem } from '../types';
-import { FOOD_CATEGORIES, UNITS } from '../constants';
+import { FoodItem } from '@shared/types';
+import { FOOD_CATEGORIES, UNITS } from '@shared/constants';
 import { Plus, Camera } from 'lucide-react';
 import { ScanModal } from './ScanModal';
 

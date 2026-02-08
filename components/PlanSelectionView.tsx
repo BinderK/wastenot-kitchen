@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react';
-import { MealPlanResponse, FoodItem } from '../types';
+import { MealPlanResponse, FoodItem } from '@shared/types';
 import { MealPlanView } from './MealPlanView';
 import { ArrowLeft, Check, AlertCircle, TrendingDown } from 'lucide-react';
-import { convertAmount, normalizeUnit } from '../utils';
+import { convertAmount, normalizeUnit } from '@shared/utils';
 
 interface PlanSelectionViewProps {
   options: MealPlanResponse[];
