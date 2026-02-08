@@ -1,0 +1,193 @@
+// Prisma schema for WasteNot Kitchen
+// Database: PostgreSQL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// Authentication & User Management
+// ============================================================================
+
+model User {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  passwordHash String?  // Null for OAuth-only users
+  displayName String?
+  avatarUrl   String?
+  createdAt   DateTime @default(now())
+
+  // Relations
+  accounts      Account[]
+  refreshTokens RefreshToken[]
+  foodItems     FoodItem[]
+  recipes       Recipe[]       @relation("UserRecipes")
+  mealPlans     MealPlan[]
+
+  @@map("users")
+}
+
+model Account {
+  id                String   @id @default(cuid())
+  userId            String
+  provider          AuthProvider
+  providerAccountId String
+  createdAt         DateTime @default(now())
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  revoked   Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("refresh_tokens")
+}
+
+// ============================================================================
+// Food Inventory
+// ============================================================================
+
+model FoodItem {
+  id         String   @id @default(cuid())
+  userId     String
+  name       String
+  quantity   Float
+  unit       String
+  expiryDate DateTime @db.Date
+  category   String
+  createdAt  DateTime @default(now())
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, expiryDate])
+  @@map("food_items")
+}
+
+// ============================================================================
+// Recipes
+// ============================================================================
+
+model Recipe {
+  id                   String       @id @default(cuid())
+  title                String
+  description          String       @db.Text
+  cookingTimeMinutes   Int
+  wasteReductionNote   String       @db.Text
+  source               RecipeSource @default(SYSTEM)
+  authorId             String?      // Null for system recipes
+  isPublic             Boolean      @default(true)
+  createdAt            DateTime     @default(now())
+
+  // Relations
+  author            User?              @relation("UserRecipes", fields: [authorId], references: [id], onDelete: SetNull)
+  ingredients       RecipeIngredient[]
+  mealPlanMeals     MealPlanMeal[]
+
+  @@index([source, isPublic])
+  @@map("recipes")
+}
+
+model RecipeIngredient {
+  id       String @id @default(cuid())
+  recipeId String
+  name     String
+  amount   String
+  order    Int
+
+  // Relations
+  recipe Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  @@index([recipeId])
+  @@map("recipe_ingredients")
+}
+
+// ============================================================================
+// Meal Planning
+// ============================================================================
+
+model MealPlan {
+  id          String    @id @default(cuid())
+  userId      String
+  planName    String
+  summary     String    @db.Text
+  isActive    Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  completedAt DateTime?
+
+  // Relations
+  user User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  days MealPlanDay[]
+
+  @@index([userId, isActive])
+  @@map("meal_plans")
+}
+
+model MealPlanDay {
+  id         String @id @default(cuid())
+  mealPlanId String
+  dayLabel   String // e.g., "Monday", "Day 1", "Feb 8"
+  dayOrder   Int    // For sorting: 0, 1, 2, etc.
+
+  // Relations
+  mealPlan MealPlan       @relation(fields: [mealPlanId], references: [id], onDelete: Cascade)
+  meals    MealPlanMeal[]
+
+  @@index([mealPlanId, dayOrder])
+  @@map("meal_plan_days")
+}
+
+model MealPlanMeal {
+  id         String   @id @default(cuid())
+  dayId      String
+  mealType   MealType
+  recipeId   String?  // Null if using recipeJson
+  recipeJson String?  @db.Text // Stored AI-generated or custom recipe
+  isEaten    Boolean  @default(false)
+
+  // Relations
+  day    MealPlanDay @relation(fields: [dayId], references: [id], onDelete: Cascade)
+  recipe Recipe?     @relation(fields: [recipeId], references: [id], onDelete: SetNull)
+
+  @@index([dayId])
+  @@map("meal_plan_meals")
+}
+
+// ============================================================================
+// Enums
+// ============================================================================
+
+enum AuthProvider {
+  GOOGLE
+  GITHUB
+  CREDENTIALS
+}
+
+enum RecipeSource {
+  SYSTEM
+  USER
+  AI_GENERATED
+}
+
+enum MealType {
+  BREAKFAST
+  LUNCH
+  DINNER
+}
